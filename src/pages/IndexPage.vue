@@ -6,6 +6,12 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+    <div style="width: 360px; height: 360px">
+      <ReactFlow :nodes="nodes">
+        <Background />
+        <Controls />
+      </ReactFlow>
+    </div>
   </q-page>
 </template>
 
@@ -13,6 +19,21 @@
 import { ref } from 'vue';
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
+import { ReactFlow, Background, Controls } from 'components/reactflow';
+
+const nodes = [
+  {
+    id: '1',
+    position: { x: 0, y: 0 },
+    data: { label: 'Hello' },
+    type: 'input',
+  },
+  {
+    id: '2',
+    position: { x: 100, y: 100 },
+    data: { label: 'World' },
+  },
+];
 
 defineOptions({
   name: 'IndexPage'

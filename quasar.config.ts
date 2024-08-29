@@ -5,7 +5,7 @@
 
 
 import { configure } from 'quasar/wrappers';
-
+import preact from "@preact/preset-vite";
 
 export default configure((/* ctx */) => {
   return {
@@ -22,7 +22,7 @@ export default configure((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
-      'app.scss'
+      'app.scss','~@xyflow/react/dist/style.css'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -54,7 +54,7 @@ export default configure((/* ctx */) => {
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
       // publicPath: '/',
-      // analyze: true,
+      analyze: true,
       // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
@@ -66,14 +66,15 @@ export default configure((/* ctx */) => {
       // viteVuePluginOptions: {},
 
       vitePlugins: [
-        ['vite-plugin-checker', {
-          vueTsc: {
-            tsconfigPath: 'tsconfig.vue-tsc.json'
-          },
-          eslint: {
-            lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"'
-          }
-        }, { server: false }]
+        preact({ reactAliasesEnabled: true })
+        // ['vite-plugin-checker', {
+        //   vueTsc: {
+        //     tsconfigPath: 'tsconfig.vue-tsc.json'
+        //   },
+        //   eslint: {
+        //     lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"'
+        //   }
+        // }, { server: false }]
       ]
     },
 
