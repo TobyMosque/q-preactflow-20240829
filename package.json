@@ -10,7 +10,7 @@
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
-    "dev": "quasar dev",
+    "dev": "quasar dev -m ssr",
     "build": "quasar build"
   },
   "dependencies": {
@@ -35,7 +35,7 @@
     "prettier": "^3.0.3",
     "typescript": "~5.5.3",
     "vite-plugin-checker": "^0.7.2",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "2.0.29"
   },
   "engines": {
     "node": "^24 || ^22 || ^20 || ^18",

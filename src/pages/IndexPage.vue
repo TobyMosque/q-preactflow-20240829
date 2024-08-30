@@ -1,13 +1,12 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <div style="width: 360px; height: 360px">
-      <ReactFlow :nodes="nodes" :nodeTypes="nodeTypes">
-        <Background />
-        <Controls />
-      </ReactFlow>
+      <component
+        :is="component"
+        v-model:name="name"
+        v-model:surname="surname"
+      ></component>
     </div>
-    <input-node :node="node1" label="Hello" v-model="name"></input-node>
-    <input-node :node="node2" label="Surname" v-model="surname"></input-node>
     <q-card>
       <q-card-section>
         <pre>{{ { name, surname } }}</pre>
@@ -17,33 +16,20 @@
 </template>
 
 <script setup lang="ts">
-import { ReactFlow, Background, Controls, VueNode } from 'components/reactflow';
-import { ref } from 'vue'
-import InputNode from 'components/InputNode.vue'
+import { type Component, h } from 'vue';
+import { ref } from 'vue';
 
-const node1 = ref<HTMLDivElement>()
-const node2 = ref<HTMLDivElement>()
+const component = ref<Component>(() => h('div', {}, 'Loading...'));
+if (process.env.CLIENT) {
+  import('components/FlowDemo.vue').then(
+    (module) => (component.value = module.default),
+  );
+}
 
-const name = ref('Toby')
-const surname = ref('Mosque')
-
-const nodeTypes = { vueNode: VueNode };
-const nodes = [
-  {
-    id: '1',
-    position: { x: 0, y: 0 },
-    data: { node: node1 },
-    type: 'vueNode',
-  },
-  {
-    id: '2',
-    position: { x: 100, y: 100 },
-    data: { node: node2 },
-    type: 'vueNode',
-  },
-];
+const name = ref('Toby');
+const surname = ref('Mosque');
 
 defineOptions({
-  name: 'IndexPage'
+  name: 'IndexPage',
 });
 </script>

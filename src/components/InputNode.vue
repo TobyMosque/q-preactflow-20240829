@@ -7,12 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { toRefs } from 'vue';
 
 const props = defineProps<{
-  node: HTMLDivElement,
-  label: string
-}>()
-const value = defineModel()
-const { node, label } = toRefs(props)
+  node?: HTMLDivElement;
+  label: string;
+}>();
+const value = defineModel<string>();
+const { node, label } = toRefs(props);
 </script>
